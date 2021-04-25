@@ -1,0 +1,24 @@
+.title{
+    color:#007bff;
+}
+
+.mgTp{
+    margin-top:5%;
+}
+
+.topBtn{
+    margin-top:5px;
+}
+
+::placeholder {
+    color: #007bff !important;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #007bff !important;
+}
+
+::-ms-input-placeholder {
+    color: #007bff !important;
+}

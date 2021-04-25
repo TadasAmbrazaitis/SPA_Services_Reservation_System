@@ -1,0 +1,18 @@
+.hom {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.myAccordion .mat-expansion-panel-header-title,
+.myAccordion .mat-expansion-panel-header-description {
+  flex-basis: 0;
+  align-items: center;
+}
+
+.myAccordion .mat-expansion-panel-header-description {
+  justify-content: space-between;
+}
+
+.myAccordion .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}

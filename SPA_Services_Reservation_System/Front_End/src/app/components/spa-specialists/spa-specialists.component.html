@@ -1,0 +1,29 @@
+<app-carousel></app-carousel>
+
+<div class="row card-group">
+  <div class="col-4 d-flex align-items-stretch" *ngFor="let spaSpecialist of spaSpecialists" style="margin-bottom:20px;">
+    <mat-card style="background-color:#56B8B9">
+      <mat-card-header style="background-color:#56B8B9">
+        <mat-list role="list">
+          <mat-card-title style="background-color:#56B8B9"><h5 style="color: white">{{ spaSpecialist.firstName }} {{ spaSpecialist.lastName }}</h5></mat-card-title>
+        </mat-list>
+      </mat-card-header>
+      <img mat-card-image src="./../../assets/spa-specialists/{{spaSpecialist.spaSpecialistId}}.jpeg" alt="SPA Specialisto Nuotrauka">
+      <mat-card-content>
+          <mat-list role="list">
+            <mat-list-item role="listitem" >
+              <mat-icon aria-hidden="false">email</mat-icon>
+              {{ spaSpecialist.emailAddress }}
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <mat-icon aria-hidden="false">phone</mat-icon>
+              {{ spaSpecialist.phoneNumber }}
+            </mat-list-item>
+            <mat-card *ngFor="let category of spaSpecialist.categories.split(',')" class="text-center" style="background-color: white; margin-bottom: 20px;"><h6 style="color: black;">{{ category }}</h6></mat-card>
+          </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

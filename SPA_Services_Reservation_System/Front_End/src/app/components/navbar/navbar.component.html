@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #095D79">
+  <div class="container">
+    <a href="#" class="navbar-left"><img src=".../../../assets/img/spalogo.ico"></a>
+    <a class="navbar-brand" routerLink="">SPA Paslaugos</a>
+    <a class="navbar-brand" routerLink="/spa-specialists">SPA Specialistai</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <a routerLink="/basket" style="cursor: pointer" class="dropdown-item"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></a>
+        <li class="nav-item dropdown" *ngIf="currentCustomer; else not_loggedin">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sveiki, {{ currentCustomer.firstName }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a routerLink="/my-reservations" style="cursor: pointer" class="dropdown-item">Rezervacijos</a>
+            <div class="dropdown-divider"></div>
+            <a routerLink="/schedule" style="cursor: pointer" class="dropdown-item">Tvarkaraštis</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logout()" style="cursor:pointer">Atsijungti</a>
+          </div>
+        </li>
+        <ng-template #not_loggedin>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">Prisijungti</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register">Registruotis</a>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</nav>

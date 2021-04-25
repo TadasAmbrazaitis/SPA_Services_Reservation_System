@@ -1,0 +1,55 @@
+<div class="schedule">
+  <mat-card class="text-center" style="background-color: #56B8B9; margin-bottom: 20px;"><h5 style="color: white;">Užsakytų paslaugų tvarkaraštis</h5></mat-card>
+  <mat-progress-bar mode="indeterminate" *ngIf="visibleLoader"></mat-progress-bar>
+  <div *ngIf="!visibleLoader">
+    <div class="calendar" *ngIf="events?.length > 0; else no_events">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <div class="btn-group">
+            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+              Praėjusi savaitė
+            </div>
+            <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+              Šiandien
+            </div>
+            <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+              Kita savaitė
+            </div>
+          </div>
+        </div>
+      </div>
+      <mwl-calendar-week-view [locale]="locale" [refresh]="refresh" (eventClicked)="eventClicked($event)" [weekStartsOn]="startWeek"
+                              [viewDate]="viewDate" [events]="events" [dayStartHour]="dayStartHour" [dayEndHour]="dayEndHour">
+      </mwl-calendar-week-view>
+    </div>
+
+    <div class="modal" id="myModal" [style.display]="showModal ? 'block' : 'none'">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h4 class="modal-title">{{event?.title}}</h4>
+            <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+          </div>
+
+          <div class="modal-body">
+            <div class="modal-body">
+              <p>{{eventHoursStart}}:{{eventMinutesStart}} - {{eventHoursEnd}}:{{eventMinutesEnd}}</p>
+              <p>{{event.spaSpecialistFirstName}} {{ event.spaSpecialistLastName }}</p>
+              <p>{{event.cabinet}}</p>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">Uždaryti</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #no_events>
+  <mat-card class="text-center" style="background-color: #F4BDAE; margin-bottom: 20px;"><h5 style="color: white;">Užsakytų paslaugų nėra!</h5></mat-card>
+</ng-template>
+
+

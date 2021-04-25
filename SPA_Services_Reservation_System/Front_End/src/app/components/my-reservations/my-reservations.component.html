@@ -1,0 +1,40 @@
+<div class="rez">
+  <mat-card class="text-center" style="background-color: #56B8B9; margin-bottom: 20px;"><h5 style="color: white;">Mano rezervacijos</h5></mat-card>
+  <mat-progress-bar mode="indeterminate" *ngIf="visibleLoader"></mat-progress-bar>
+  <div *ngIf="!visibleLoader">
+    <table class="table" *ngIf="this.reservations.length > 0; else no_reservations" style="background-color: white">
+      <thead class="thead-light">
+        <tr>
+          <th style="font-size:14px;" scope="col">Spa paslaugos</th>
+          <th style="font-size:14px;" scope="col">Atvykimas</th>
+          <th style="font-size:14px;" scope="col">Išvykimas</th>
+          <th style="font-size:14px;" scope="col">Suma</th>
+          <th style="font-size:14px;" scope="col">Mokėjimo būdas</th>
+          <th style="font-size:14px;" scope="col"></th>
+          <th style="font-size:14px;" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td style="font-size:14px;">
+            <ul style="list-style-type:square; margin: 0; padding:20px;">
+              <li *ngFor="let spaService of reservation.reservationSpaServices">{{spaService.title}} <i> {{spaService.durationMinutes}} min.</i></li>
+            </ul>
+          </td>
+          <td style="font-size:14px; vertical-align:middle;">{{ reservation.start | date :'y-MM-dd'}}</td>
+          <td style="font-size:14px; vertical-align:middle;">{{ reservation.end | date :'y-MM-dd' }}</td>
+          <td style="font-size:14px; vertical-align:middle;">{{ reservation.totalAmount }}€</td>
+          <td style="font-size:14px; vertical-align:middle;">{{ reservation.paymentMethod }}</td>
+          <td *ngIf="reservation.paymentMethod == 'Internetu' && reservation.status == 'Neapmokėta'" style="font-size:14px; text-align:center; vertical-align:middle;"><button class="btn btn-primary" (click)="pay(reservation.reservationId, reservation.totalAmount)">Mokėti</button></td>
+          <td *ngIf="reservation.paymentMethod == 'Internetu' && reservation.status == 'Apmokėta'" style="font-size:14px; text-align:center; vertical-align:middle; color:green"><i class="fa fa-check" aria-hidden="true"> Apmokėta</i></td>
+          <td *ngIf="reservation.paymentMethod == 'Grynais'" class="text-center" style="font-size:14px; text-align:center; vertical-align:middle;"></td>
+          <td class="text-center" style="font-size:14px; text-align:center; vertical-align:middle;"><button class="btn btn-primary" style="background-color: red; border: none;" (click)="cancel(reservation.reservationId)">Atšaukti rezervaciją</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="visibleLoader && reservations?.length > 0"></mat-progress-bar>
+  <ng-template #no_reservations>
+    <mat-card class="text-center" style="background-color: #F4BDAE; margin-bottom: 20px;"><h5 style="color: white;">Rezervacijų nėra!</h5></mat-card>
+  </ng-template>
+</div>

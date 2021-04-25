@@ -1,0 +1,65 @@
+<app-carousel></app-carousel>
+
+<table class="table" style="background-color:white">
+  <thead class="thead-light">
+    <tr>
+      <th style="font-size:14px;" scope="col">
+        <mat-form-field>
+          <mat-label>Kategorija</mat-label>
+          <mat-select [(ngModel)]="filterCategory">
+            <mat-option value="Visos">Visos</mat-option>
+            <mat-option value="Kūno Masažai">Kūno Masažai</mat-option>
+            <mat-option value="Veido Masažai">Veido Masažai</mat-option>
+            <mat-option value="Nėščiųjų Masažai">Nėščiųjų Masažai</mat-option>
+            <mat-option value="Kūno Procedūros">Kūno Procedūros</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </th>
+      <th style="font-size:14px;" scope="col">
+        <mat-form-field>
+          <mat-label>Trukmė</mat-label>
+          <mat-select [(ngModel)]="filterDuration">
+            <mat-option value=999>Visos</mat-option>
+            <mat-option value=30>iki 30 min.</mat-option>
+            <mat-option value=60>iki 60 min.</mat-option>
+            <mat-option value=90>iki 1.5 val.</mat-option>
+            <mat-option value=120>iki 2 val.</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </th>
+      <th style="font-size:14px;" scope="col">
+        <mat-form-field>
+          <mat-label>Kaina</mat-label>
+          <mat-select [(ngModel)]="filterPrice">
+            <mat-option value=999>Visos</mat-option>
+            <mat-option value=20>iki 20€</mat-option>
+            <mat-option value=40>iki 40€</mat-option>
+            <mat-option value=60>iki 60€</mat-option>
+            <mat-option value=80>iki 80€</mat-option>
+            <mat-option value=100>iki 100€</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </th>
+      <th style="font-size:14px;" scope="col"></th>
+      <th style="font-size:14px;" scope="col"></th>
+    </tr>
+  </thead>
+ </table>
+
+  <div *ngFor="let category of categories" style="margin-bottom:20px;">
+    <mat-card style="background-color:#56B8B9"><h5 style="color: white">{{ category }}</h5></mat-card>
+    <mat-accordion class="myAccordion" multi *ngFor="let spaService of spaServices | filter:filterPrice:filterCategory:filterDuration" style="margin-bottom:20px;">
+      <mat-expansion-panel *ngIf="spaService.category == category" style="margin-bottom:5px;">
+        <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="160px">
+          <mat-panel-title>{{ spaService.title }}</mat-panel-title>
+          <mat-panel-description>
+            <i>{{ spaService.durationMinutes }} min.</i>
+            <b>{{ spaService.price }}€</b>
+            <button class="btn" (click)="addToCart(spaService.spaServiceId); $event.stopPropagation();"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></button>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{ spaService.description }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div style="margin-bottom:20px;"><br /></div>

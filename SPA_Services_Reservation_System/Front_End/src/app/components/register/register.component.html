@@ -1,0 +1,69 @@
+<div class="row mgTp">
+  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && register()" class="col-md-6 offset-md-3" novalidate>
+    <mat-card class="text-center" style="background-color: #56B8B9; margin-bottom: 20px;"><h5 style="color: white;">Registracija</h5></mat-card>
+    <div class="form-group">
+      <div>
+        <label>Vardas</label>
+        <input type="text" name="firstName" #firstName="ngModel" [(ngModel)]="model.firstName" required
+               class="form-control" placeholder="Vardas">
+      </div>
+      <div style="color: red; text-align: center;" *ngIf="f.submitted && !firstName.valid">Privalomas laukelis</div>
+    </div>
+
+    <div class="form-group">
+      <div>
+        <label>Pavardė</label>
+        <input type="text" name="lastName" #lastName="ngModel" [(ngModel)]="model.lastName" required
+               class="form-control" placeholder="Pavardė">
+      </div>
+      <div style="color: red; text-align: center;" *ngIf="f.submitted && !lastName.valid">Privalomas laukelis</div>
+
+    </div>
+
+    <div class="form-group">
+      <div>
+        <label>El. paštas</label>
+        <input type="email" name="emailAddress" #emailAddress="ngModel" [(ngModel)]="model.emailAddress" required class="form-control"
+               placeholder="El. paštas">
+      </div>
+      <div style="color: red; text-align: center;" *ngIf="f.submitted && !emailAddress.valid">Privalomas laukelis</div>
+
+    </div>
+
+    <div class="form-group">
+      <div>
+        <label>Tel. numeris</label>
+        <input type="text" name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="model.phoneNumber" required
+               class="form-control" placeholder="Tel. numeris">
+      </div>
+      <div style="color: red; text-align: center;" *ngIf="f.submitted && !phoneNumber.valid">Privalomas laukelis</div>
+
+    </div>
+
+    <div class="form-group">
+      <div>
+        <label>Asmens kodas</label>
+        <input type="text" name="personalId" #personalId="ngModel" [(ngModel)]="model.personalId" required
+               class="form-control" placeholder="Asmens kodas">
+      </div>
+      <div style="color: red; text-align: center;" *ngIf="f.submitted && !personalId.valid">Privalomas laukelis</div>
+
+    </div>
+
+    <div class="form-group">
+      <div [ngClass]="{'has-error': 'f.submitted && !password.valid'}">
+        <label>Slaptažodis</label>
+        <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" required
+               class="form-control" placeholder="Slaptažodis">
+      </div>
+      <div style="color: red; text-align: center;" *ngIf="f.submitted && !password.valid">Privalomas laukelis</div>
+
+    </div>
+
+    <p><a routerLink="/login">Jau užsiregistravę? Prisijunkite</a></p>
+
+    <button type="submit" class="btn btn-primary topBtn"><i class="fa fa-sign-in"></i> Registruotis </button>
+
+  </form>
+
+</div>

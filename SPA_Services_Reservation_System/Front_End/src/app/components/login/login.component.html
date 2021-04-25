@@ -1,0 +1,25 @@
+<div class="row mgTp">
+  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && login()" novalidate class="col-md-6 offset-md-3">
+    <mat-card class="text-center" style="background-color: #56B8B9; margin-bottom: 20px;"><h5 style="color: white;">Prisijungimas</h5></mat-card>
+    <div class="form-group">
+      <div [ngClass]="{'has-error': 'f.submitted && emailAddress.valid'}">
+        <label>El. paštas</label>
+        <input type="email" name="emailAddress" #emailAddress="ngModel" [(ngModel)]="model.emailAddress" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="El. paštas">
+      </div>
+      <div style="color: red; text-align: center;" *ngIf="f.submitted && !emailAddress.valid">Privalomas laukelis</div>
+
+    </div>
+    <div class="form-group">
+      <div [ngClass]="{'has-error': 'f.submitted && password.valid'}">
+        <label>Slaptažodis</label>
+        <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" required class="form-control" id="exampleInputPassword1" placeholder="Slaptažodis">
+      </div>
+      <div style="color: red; text-align: center;" *ngIf="f.submitted && !password.valid">Privalomas laukelis</div>
+
+    </div>
+
+    <p><a routerLink="/register">Dar neužsiregistravę? Registruokitės</a></p>
+
+    <button type="submit" class="btn btn-primary topBtn"><i class="fa fa-sign-in"></i> Prisijungti </button>
+  </form>
+</div>

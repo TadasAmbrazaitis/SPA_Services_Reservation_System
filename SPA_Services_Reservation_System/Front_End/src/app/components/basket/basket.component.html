@@ -1,0 +1,78 @@
+<div class="bas">
+  <mat-card class="text-center" style="background-color: #56B8B9; margin-bottom: 20px;"><h5 style="color: white;">Mano krepšelis</h5></mat-card>
+  <mat-progress-bar mode="indeterminate" *ngIf="visibleLoader"></mat-progress-bar>
+  <div *ngIf="!visibleLoader">
+    <table class="table" *ngIf="this.cartItemsFinal.length > 0; else emptyBasket" style="background-color:white">
+      <thead class="thead-light">
+        <tr>
+          <th style="font-size:14px;" scope="col">Spa Paslauga</th>
+          <th style="font-size:14px;" scope="col">Trukmė</th>
+          <th style="font-size:14px;" scope="col">Kaina</th>
+          <th style="font-size:14px;" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let spaService of cartItemsFinal">
+          <td style="font-size:14px;">{{ spaService.title }}</td>
+          <td style="font-size:14px;">{{ spaService.durationMinutes }} min.</td>
+          <td style="font-size:14px;">{{ spaService.price }}€ </td>
+          <td style="font-size:14px;"><button class="btn" (click)="removeItem()"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td style="font-size: 14px;">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" [(ngModel)]="start" required [formControl]="formFieldControl1" placeholder="Atvykimo data">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker startView="month"></mat-datepicker>
+              <mat-error>Privalomas laukelis</mat-error>
+            </mat-form-field>
+            <br /> <br />
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker2" [(ngModel)]="end" required [formControl]="formFieldControl2" placeholder="Išvykimo data">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2 startView="month"></mat-datepicker>
+              <mat-error>Privalomas laukelis</mat-error>
+            </mat-form-field>
+          </td>
+          <td style="font-size: 14px;">
+            <mat-form-field>
+              <mat-label>Paslaugų atlikimo laikas</mat-label>
+              <mat-select [(ngModel)]="timePreference" required [formControl]="formFieldControl3">
+                <mat-option value="Ryte">Ryte</mat-option>
+                <mat-option value="Dieną">Dieną</mat-option>
+                <mat-option value="Nesvarbu">Nesvarbu</mat-option>
+              </mat-select>
+              <mat-error>Privalomas laukelis</mat-error>
+            </mat-form-field>
+          </td>
+          <td style="font-size: 14px;">
+            <br />
+            <b>Iš viso {{getTotalAmount()}}€</b> <br /> <br /> <br />
+            <mat-form-field>
+              <mat-label>Mokėjimo būdas</mat-label>
+              <mat-select [(ngModel)]="paymentMethod" required [formControl]="formFieldControl4">
+                <mat-option value="Internetu">Internetu</mat-option>
+                <mat-option value="Grynais">Grynais</mat-option>
+              </mat-select>
+              <mat-error>Privalomas laukelis</mat-error>
+            </mat-form-field>
+            <br />
+          </td>
+          <td style="font-size: 14px;"></td>
+        </tr>
+        <tr>
+          <td style="font-size: 14px;"></td>
+          <td style="font-size: 14px;"></td>
+          <td style="font-size: 14px;"><button type="submit" class="btn btn-primary" (click)="reserve()" style="color: #fff; cursor: pointer;">Rezervuoti</button></td>
+          <td style="font-size: 14px;">
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <ng-template #emptyBasket>
+    <mat-card class="text-center" style="background-color: #F4BDAE; margin-bottom: 20px;"><h5 style="color: white;">Dar nepasirinkote nei vienos paslaugos!</h5></mat-card>
+  </ng-template>
+</div>
